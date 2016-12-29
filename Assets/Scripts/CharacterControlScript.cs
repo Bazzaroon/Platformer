@@ -36,7 +36,7 @@ public class CharacterControlScript : MonoBehaviour {
 				if (jumping) {
 						VerticalSpeed = VerticalSpeed / ((JumpHeight + jumpStart) + Mathf.Abs (jumpStart) / Mathf.Abs (transform.position.y));
 				}
-		//Debug.Log ("Jump Height:" + JumpHeight.ToString() + " Jump Start:" + jumpStart.ToString());
+		Debug.Log ("Jump Height:" + JumpHeight.ToString() + " Jump Start:" + jumpStart.ToString() + " Vertical Speed:" + VerticalSpeed.ToString());
 
 				VerticalSpeed = VerticalSpeed < 1 ? 1 : VerticalSpeed;
 
