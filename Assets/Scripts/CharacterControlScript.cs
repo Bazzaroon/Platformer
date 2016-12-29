@@ -10,9 +10,9 @@ public class CharacterControlScript : MonoBehaviour {
 	public Camera mainCamera;
 	private BoxCollider2D collider;
 	private CircleCollider2D grounder;
+	public float jumpForwardSpeed;
 
 	private bool jumping = false;
-
 	private bool facingForward = true;
 
 
@@ -27,12 +27,11 @@ public class CharacterControlScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-				var vRate = Input.GetAxis ("Vertical");
 
-				if (jumping)
-						vRate = 0;
+				var vRate = jumping ? 1f : 0f;
 
-				var rate = Input.GetAxis ("Horizontal");
+				var rate = jumping ? jumpForwardSpeed : Input.GetAxis ("Horizontal");
+
 				var tScale = transform.localScale;
 				var tForm = transform.position;
 				rb2d.velocity = new Vector2 (rate * Speed, vRate * VerticalSpeed);
@@ -51,13 +50,15 @@ public class CharacterControlScript : MonoBehaviour {
 				} else if (rate == 0) {
 						anim.SetBool ("Run", false);
 				}
-		if (transform.position.y > 1) 
+				if (transform.position.y > 1) {
+			jumping = false;
+				}
+
+		if (Input.GetKeyDown (KeyCode.Space))
 		{
+			rb2d.velocity = new Vector2(10f,10f);
 			jumping = true;
 		}
-
-		if( Input.GetKeyDown( KeyCode.Space ) )
-			Debug.Log( "Space key was pressed." );
 	}
 
 
